@@ -8,6 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "3.9.16"
 bitfinex-api-py = "3.0.0b3"
+python-dotenv = "^1.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
