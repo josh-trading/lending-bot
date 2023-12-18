@@ -4,7 +4,8 @@ from dotenv import load_dotenv
 
 import threading
 import asyncio
-from constants import LENDING_CRITERIA, LENDING_PERIOD
+from config.system import LENDING_CRITERIA, LENDING_PERIOD
+from config.funding_offer import OFFER_TYPE, OFFER_RATE
 from library.market.candle import CandleSubscriber
 from library.account.wallet import WalletSubscriber
 
@@ -21,7 +22,12 @@ async def start():
     # await candle_subscriber.start()
     # Create an instance of the WalletSubscriber class
     wallet_subscriber = WalletSubscriber(
-        config={"lending_criteria": LENDING_CRITERIA, "lending_period": LENDING_PERIOD}
+        config={
+            "lending_criteria": LENDING_CRITERIA,
+            "lending_period": LENDING_PERIOD,
+            "offer_type": OFFER_TYPE,
+            "offer_rate": OFFER_RATE,
+        }
     )
     await wallet_subscriber.start()
 
