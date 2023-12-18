@@ -23,6 +23,12 @@ class WalletSubscriber:
             if "lending_period" in config:
                 self.lending_period = config["lending_period"]
                 print(f"Lending Period: {self.lending_period}")
+            if "offer_type" in config:
+                self.offer_type = config["offer_type"]
+                print(f"Offer Type: {self.offer_type}")
+            if "offer_rate" in config:
+                self.offer_rate = config["offer_rate"]
+                print(f"Offer Rate: {self.offer_rate}")
 
         # Register the event handler
         self.client.wss.on("disconnected", self.on_disconnected)
@@ -61,9 +67,9 @@ class WalletSubscriber:
                     f"Available balance ({wallet.currency}): {wallet.available_balance} is greater than the lending criteria: {self.lending_criteria}"
                 )
                 FundingOffer().submit_funding_offer(
-                    type="FRRDELTAFIX",
+                    type=self.offer_type,
                     symbol=f"f{wallet.currency}",
                     amount=str(self.lending_criteria),
-                    rate="0",
+                    rate=self.offer_rate,
                     period=self.lending_period,
                 )
